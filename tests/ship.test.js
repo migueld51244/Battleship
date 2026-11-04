@@ -50,7 +50,7 @@ describe("Test isSunk method", () => {
     expect(ship.isSunk()).toBe(false);
   });
 
-  test("Ship is destroyed after the number of hits equal the length", () => {
+  test("Ship is destroyed when the number of hits equal the length", () => {
     ship.hit();
     ship.hit();
     ship.hit();
@@ -58,7 +58,15 @@ describe("Test isSunk method", () => {
   });
 
   test("Ship isn't destroyed when the hits are less than it's length", () => {
+    const ship = new Ship(3);
     ship.hit();
     expect(ship.isSunk()).toBe(false);
+  });
+
+  test("Method returns when the ship is sunk", () => {
+    const ship = new Ship(1);
+    ship.hit();
+    expect(ship.hit()).toBe(undefined)
+    expect(ship.hits).toBe(1)
   });
 });
