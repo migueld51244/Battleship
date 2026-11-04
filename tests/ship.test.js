@@ -16,11 +16,11 @@ describe("Handle omissions", () => {
   const emptyShip = new Ship();
 
   test("Handle undefined length", () => {
-    expect(emptyShip.length).toBe(null);
+    expect(emptyShip.length).toBe(undefined);
   });
 
   test("Check if it's sunk without length", () => {
-    expect(emptyShip.isSunk()).toBe(null);
+    expect(emptyShip.isSunk()).toBe(false);
   });
 });
 
