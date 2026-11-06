@@ -213,3 +213,74 @@ describe("Position multiple ship on the same board", () => {
     ]);
   });
 });
+
+describe("Ships can't overflow the board", () => {
+  test("One ship can't go beyond the board's limit", () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(3);
+    const placedShip = gameboard.placeShip(ship, [9, 9], "vertical");
+    expect(placedShip).toBe(false);
+    expect(gameboard.board).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+
+  test("Two ships can't go beyond the board's limit", () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(3);
+    const ship2 = new Ship(4);
+    const placedShip1 = gameboard.placeShip(ship1, [9, 9], "vertical");
+    const placedShip2 = gameboard.placeShip(ship2, [9, 9], "horizontal");
+    expect(placedShip1).toBe(false);
+    expect(placedShip2).toBe(false);
+    expect(gameboard.board).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+
+  test("Multiple ships can't go beyond the board's limit", () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(3);
+    const ship2 = new Ship(5);
+    const ship3 = new Ship(2);
+    const ship4 = new Ship(4);
+    const placedShip1 = gameboard.placeShip(ship1, [7, 0], "vertical");
+    const placedShip2 = gameboard.placeShip(ship2, [4, 8], "horizontal");
+    const placedShip3 = gameboard.placeShip(ship3, [9, 3], "vertical");
+    const placedShip4 = gameboard.placeShip(ship4, [6, 7], "horizontal");
+    expect(placedShip1).toBe(false);
+    expect(placedShip2).toBe(false);
+    expect(placedShip3).toBe(false);
+    expect(placedShip4).toBe(false);
+    expect(gameboard.board).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+});
