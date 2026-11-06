@@ -111,3 +111,105 @@ describe("Correctly places ships", () => {
     ]);
   });
 });
+
+describe("Position multiple ship on the same board", () => {
+  test("Correctly places 2 ships in the same board", () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(3);
+    const ship2 = new Ship(5);
+
+    gameboard.placeShip(ship1, [0, 0], "vertical");
+    gameboard.placeShip(ship2, [2, 2], "horizontal");
+
+    expect(gameboard.board).toEqual([
+      [ship1, null, null, null, null, null, null, null, null, null],
+      [ship1, null, null, null, null, null, null, null, null, null],
+      [ship1, null, ship2, ship2, ship2, ship2, ship2, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+
+  test("Correctly places 3 ships in the same board", () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(3);
+    const ship2 = new Ship(5);
+    const ship3 = new Ship(2);
+
+    gameboard.placeShip(ship1, [0, 0], "vertical");
+    gameboard.placeShip(ship2, [2, 2], "horizontal");
+    gameboard.placeShip(ship3, [6, 1], "vertical");
+
+    expect(gameboard.board).toEqual([
+      [ship1, null, null, null, null, null, null, null, null, null],
+      [ship1, null, null, null, null, null, null, null, null, null],
+      [ship1, null, ship2, ship2, ship2, ship2, ship2, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, ship3, null, null, null, null, null, null, null, null],
+      [null, ship3, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+
+  test("Correctly places 4 ships in the same board", () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(3);
+    const ship2 = new Ship(5);
+    const ship3 = new Ship(4);
+    const ship4 = new Ship(2);
+
+    gameboard.placeShip(ship1, [0, 0], "vertical");
+    gameboard.placeShip(ship2, [2, 2], "horizontal");
+    gameboard.placeShip(ship3, [1, 1], "horizontal");
+    gameboard.placeShip(ship4, [5, 8], "vertical");
+
+    expect(gameboard.board).toEqual([
+      [ship1, null, null, null, null, null, null, null, null, null],
+      [ship1, ship3, ship3, ship3, ship3, null, null, null, null, null],
+      [ship1, null, ship2, ship2, ship2, ship2, ship2, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, ship4, null],
+      [null, null, null, null, null, null, null, null, ship4, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+
+  test("Correctly places 5 ships in the same board", () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(3);
+    const ship2 = new Ship(5);
+    const ship3 = new Ship(2);
+    const ship4 = new Ship(3);
+    const ship5 = new Ship(4);
+
+    gameboard.placeShip(ship1, [0, 0], "vertical");
+    gameboard.placeShip(ship2, [2, 2], "horizontal");
+    gameboard.placeShip(ship3, [8, 9], "vertical");
+    gameboard.placeShip(ship4, [9, 0], "horizontal");
+    gameboard.placeShip(ship5, [6, 4], "horizontal");
+
+    expect(gameboard.board).toEqual([
+      [ship1, null, null, null, null, null, null, null, null, null],
+      [ship1, null, null, null, null, null, null, null, null, null],
+      [ship1, null, ship2, ship2, ship2, ship2, ship2, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, ship5, ship5, ship5, ship5, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, ship3],
+      [ship4, ship4, ship4, null, null, null, null, null, null, ship3],
+    ]);
+  });
+});
