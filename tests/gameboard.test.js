@@ -1,22 +1,24 @@
 import { Gameboard } from "../src/modules/gameboard.js";
 import { Ship } from "../src/modules/ship.js";
 
+const emptyBoard = [
+  [null, null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null, null],
+];
+
 describe("Check empty gameboard properties", () => {
   const gameboard = new Gameboard();
 
   test("Gameboard is empty upon creation", () => {
-    expect(gameboard.board).toEqual([
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-    ]);
+    expect(gameboard.board).toEqual(emptyBoard);
   });
 });
 
@@ -79,36 +81,14 @@ describe("Correctly places ships", () => {
     const gameboard = new Gameboard();
     const ship = new Ship(4);
     gameboard.placeShip(ship, [3, 6], "vertical");
-    expect(gameboard.board).toEqual([
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, ship, null, null, null],
-      [null, null, null, null, null, null, ship, null, null, null],
-      [null, null, null, null, null, null, ship, null, null, null],
-      [null, null, null, null, null, null, ship, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-    ]);
+    expect(gameboard.board).toEqual(emptyBoard);
   });
 
   test("Place ship horizontally starting at [7, 3], length 2", () => {
     const gameboard = new Gameboard();
     const ship = new Ship(2);
     gameboard.placeShip(ship, [7, 3], "horizontal");
-    expect(gameboard.board).toEqual([
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, ship, ship, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-    ]);
+    expect(gameboard.board).toEqual(emptyBoard);
   });
 });
 
@@ -220,18 +200,7 @@ describe("Ships can't overflow the board", () => {
     const ship = new Ship(3);
     const placedShip = gameboard.placeShip(ship, [9, 9], "vertical");
     expect(placedShip).toBe(false);
-    expect(gameboard.board).toEqual([
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-    ]);
+    expect(gameboard.board).toEqual(emptyBoard);
   });
 
   test("Two ships can't go beyond the board's limit", () => {
@@ -242,18 +211,7 @@ describe("Ships can't overflow the board", () => {
     const placedShip2 = gameboard.placeShip(ship2, [9, 9], "horizontal");
     expect(placedShip1).toBe(false);
     expect(placedShip2).toBe(false);
-    expect(gameboard.board).toEqual([
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-    ]);
+    expect(gameboard.board).toEqual();
   });
 
   test("Multiple ships can't go beyond the board's limit", () => {
@@ -270,8 +228,17 @@ describe("Ships can't overflow the board", () => {
     expect(placedShip2).toBe(false);
     expect(placedShip3).toBe(false);
     expect(placedShip4).toBe(false);
+    expect(gameboard.board).toEqual(emptyBoard);
+  });
+});
+
+describe("Handle attacks", () => {
+  test("Board receives one attack to one ship correctly", () => {
+    const ship = new Ship(2);
+    const gameboard = new Gameboard();
+    gameboard.receiveAttack([0, 0]);
     expect(gameboard.board).toEqual([
-      [null, null, null, null, null, null, null, null, null, null],
+      ["hit", ship, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -282,5 +249,6 @@ describe("Ships can't overflow the board", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(ship.hits).toBe(1);
   });
 });
