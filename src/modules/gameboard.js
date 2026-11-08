@@ -20,6 +20,14 @@ export class Gameboard {
 
     const [x, y] = start;
 
+    if (!Number.isInteger(x) || x < 0 || x > 9) {
+      throw new Error("Invalid coordinates");
+    }
+
+    if (!Number.isInteger(y) || y < 0 || y > 9) {
+      throw new Error("Invalid coordinates");
+    }
+
     // Generate and validate coordinates
     for (let i = 0; i < ship.length; i++) {
       const currentX = orientation === "vertical" ? x + i : x;
