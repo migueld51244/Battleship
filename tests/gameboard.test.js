@@ -434,6 +434,20 @@ describe("Ships cannot overlap", () => {
   });
 });
 
+describe("Invalid orientation is rejected", () => {
+  test("Ship doesn't get placed without orientation", () => {
+    const ship = new Ship(3);
+    const gameboard = new Gameboard();
+    expect(() => gameboard.placeShip(ship, [0, 0])).toThrow();
+  });
+
+  test("Ship doesn't get placed with an invalid orientation", () => {
+    const ship = new Ship(3);
+    const gameboard = new Gameboard();
+    expect(() => gameboard.placeShip(ship, [0, 0], "diagonal")).toThrow();
+  });
+});
+
 describe("Gameboard tracks missed attacks", () => {
   test("Board receives two missed attacks", () => {
     const ship = new Ship(3);
