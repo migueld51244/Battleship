@@ -39,6 +39,7 @@ describe("Correctly places ships", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.ships).toEqual([ship]);
   });
 
   test("Place ship vertically starting at [0, 0], length 2", () => {
@@ -57,6 +58,7 @@ describe("Correctly places ships", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.ships).toEqual([ship]);
   });
 
   test("Place ship horizontally starting at [4, 1], length 5", () => {
@@ -75,6 +77,7 @@ describe("Correctly places ships", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.ships).toEqual([ship]);
   });
 
   test("Place ship vertically starting at [3, 6], length 4", () => {
@@ -93,6 +96,7 @@ describe("Correctly places ships", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.ships).toEqual([ship]);
   });
 
   test("Place ship horizontally starting at [7, 3], length 2", () => {
@@ -111,6 +115,7 @@ describe("Correctly places ships", () => {
       [null, null, null, ship, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.ships).toEqual([ship]);
   });
 });
 
@@ -135,6 +140,7 @@ describe("Position multiple ship on the same board", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.ships).toEqual([ship1, ship2]);
   });
 
   test("Correctly places 3 ships in the same board", () => {
@@ -159,6 +165,7 @@ describe("Position multiple ship on the same board", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.ships).toEqual([ship1, ship2, ship3]);
   });
 
   test("Correctly places 4 ships in the same board", () => {
@@ -185,6 +192,7 @@ describe("Position multiple ship on the same board", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.ships).toEqual([ship1, ship2, ship3, ship4]);
   });
 
   test("Correctly places 5 ships in the same board", () => {
@@ -213,6 +221,7 @@ describe("Position multiple ship on the same board", () => {
       [null, null, null, null, null, null, null, null, null, ship3],
       [ship4, ship4, ship4, null, null, null, null, null, null, ship3],
     ]);
+    expect(gameboard.ships).toEqual([ship1, ship2, ship3, ship4, ship5]);
   });
 });
 
@@ -223,6 +232,7 @@ describe("Ships can't overflow the board", () => {
     const placedShip = gameboard.placeShip(ship, [9, 9], "vertical");
     expect(placedShip).toBe(false);
     expect(gameboard.board).toEqual(emptyBoard);
+    expect(gameboard.ships).toEqual([]);
   });
 
   test("Two ships can't go beyond the board's limit", () => {
@@ -234,6 +244,7 @@ describe("Ships can't overflow the board", () => {
     expect(placedShip1).toBe(false);
     expect(placedShip2).toBe(false);
     expect(gameboard.board).toEqual(emptyBoard);
+    expect(gameboard.ships).toEqual([]);
   });
 
   test("Multiple ships can't go beyond the board's limit", () => {
@@ -251,6 +262,7 @@ describe("Ships can't overflow the board", () => {
     expect(placedShip3).toBe(false);
     expect(placedShip4).toBe(false);
     expect(gameboard.board).toEqual(emptyBoard);
+    expect(gameboard.ships).toEqual([]);
   });
 });
 
