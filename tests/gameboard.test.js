@@ -596,3 +596,42 @@ describe("Gameboard reports whether or not all of their ships have been sunk", (
     expect(gameboard.areAllShipsSunk()).toBe(true);
   });
 });
+
+describe("Attacking doesn't modify ship placement", () => {
+  test("Attacks one ship, and the gameboard still contains all the ships in the correct position", () => {
+    const ship1 = new Ship(2);
+    const ship2 = new Ship(4);
+    const gameboard = new Gameboard();
+
+    gameboard.placeShip(ship1, [4, 2], "vertical");
+    gameboard.placeShip(ship2, [4, 9], "vertical");
+
+    gameboard.receiveAttack([4, 9]);
+    gameboard.receiveAttack([5, 9]);
+
+    expect(gameboard.board).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, ship1, null, null, null, null, null, null, ship2],
+      [null, null, ship1, null, null, null, null, null, null, ship2],
+      [null, null, null, null, null, null, null, null, null, ship2],
+      [null, null, null, null, null, null, null, null, null, ship2],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+    expect(gameboard.attacks).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, "hit"],
+      [null, null, null, null, null, null, null, null, null, "hit"],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+});
