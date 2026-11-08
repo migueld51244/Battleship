@@ -417,3 +417,29 @@ describe("Gameboard tracks missed attacks", () => {
     expect(ship2.isSunk()).toBe(true);
   });
 });
+
+describe("Gameboard reports whether or not all of their ships have been sunk", () => {
+  test("All ships haven't been sunk when they aren't hit", () => {
+    const ship1 = new Ship(2);
+    const ship2 = new Ship(2);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship1, [4, 1], "vertical");
+    gameboard.placeShip(ship2, [0, 8], "vertical");
+    gameboard.receiveAttack([4, 1]);
+    gameboard.receiveAttack([0, 8]);
+    expect(gameboard.areAllShipsSunk()).toBe(false);
+  });
+
+  test("All ships have been sunk when they are all sank", () => {
+    const ship1 = new Ship(2);
+    const ship2 = new Ship(2);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship1, [4, 1], "vertical");
+    gameboard.placeShip(ship2, [0, 8], "vertical");
+    gameboard.receiveAttack([4, 1]);
+    gameboard.receiveAttack([5, 1]);
+    gameboard.receiveAttack([0, 8]);
+    gameboard.receiveAttack([1, 8]);
+    expect(gameboard.areAllShipsSunk()).toBe(true);
+  });
+});
