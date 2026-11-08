@@ -211,7 +211,7 @@ describe("Ships can't overflow the board", () => {
     const placedShip2 = gameboard.placeShip(ship2, [9, 9], "horizontal");
     expect(placedShip1).toBe(false);
     expect(placedShip2).toBe(false);
-    expect(gameboard.board).toEqual();
+    expect(gameboard.board).toEqual(emptyBoard);
   });
 
   test("Multiple ships can't go beyond the board's limit", () => {
