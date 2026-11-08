@@ -12,15 +12,9 @@ describe("Test ship integrity", () => {
   });
 });
 
-describe("Handle omissions", () => {
-  test("Handle undefined length", () => {
-    const emptyShip = new Ship();
-    expect(emptyShip.length).toBe(undefined);
-  });
-
-  test("Check if it's sunk without length", () => {
-    const emptyShip = new Ship();
-    expect(emptyShip.isSunk()).toBe(false);
+describe("Handle invalid length", () => {
+  test("Cannot create a ship without a length", () => {
+    expect(() => new Ship()).toThrow();
   });
 });
 
