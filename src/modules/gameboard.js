@@ -61,5 +61,24 @@ export class Gameboard {
     if (y < 0 || y > 9 || !Number.isInteger(x)) {
       throw new Error("Invalid coordinates");
     }
+
+    const position = this.board[x][y];
+
+    // Already attacked
+    if (this.attacks[x][y]) {
+      return false;
+    }
+
+    // Register attack
+    if (!position) {
+      this.attacks[x][y] = "miss";
+    }
+
+    if (position) {
+      this.attacks[x][y] = "hit";
+      position.hit();
+    }
+
+    return true;
   }
 }
