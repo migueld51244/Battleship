@@ -573,6 +573,26 @@ describe("Gameboard tracks missed attacks", () => {
     expect(ship1.isSunk()).toBe(true);
     expect(ship2.isSunk()).toBe(true);
   });
+
+  test("Gameboard ignores attack on already missed coordinate", () => {
+    const gameboard = new Gameboard();
+    gameboard.receiveAttack([0, 0]);
+    const result = gameboard.receiveAttack([0, 0]);
+    expect(gameboard.board).toEqual(emptyBoard);
+    expect(result).toBe(false);
+    expect(gameboard.attacks).toEqual([
+      ["miss", null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
 });
 
 describe("Gameboard reports whether or not all of their ships have been sunk", () => {
