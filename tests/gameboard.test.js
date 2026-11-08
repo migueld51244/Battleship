@@ -340,3 +340,80 @@ describe("Handle attacks", () => {
     expect(ship2.isSunk()).toBe(true);
   });
 });
+
+describe("Gameboard tracks missed attacks", () => {
+  test("Board receives two missed attacks", () => {
+    const ship = new Ship(3);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship, [0, 0], "horizontal");
+    gameboard.receiveAttack([8, 9]);
+    gameboard.receiveAttack([9, 9]);
+    expect(gameboard.board).toBe([
+      [ship, ship, ship, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, "miss"],
+      [null, null, null, null, null, null, null, null, null, "miss"],
+    ]);
+  });
+
+  test("Board receives two missed attacks and one on a ship", () => {
+    const ship = new Ship(3);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship, [0, 0], "horizontal");
+    gameboard.receiveAttack([8, 9]);
+    gameboard.receiveAttack([9, 9]);
+    gameboard.receiveAttack([0, 1]);
+    expect(gameboard.board).toBe([
+      [ship, "hit", ship, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, "miss"],
+      [null, null, null, null, null, null, null, null, null, "miss"],
+    ]);
+    expect(ship.hits).toBe(1);
+    expect(ship.isSunk()).toBe(false);
+  });
+
+  test("Board sinks two ships and missed 3 attacks", () => {
+    const ship1 = new Ship(3);
+    const ship2 = new Ship(3);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship1, [0, 0], "horizontal");
+    gameboard.placeShip(ship2, [4, 2], "vertical");
+    gameboard.receiveAttack([8, 9]);
+    gameboard.receiveAttack([9, 9]);
+
+    gameboard.receiveAttack([0, 0]);
+    gameboard.receiveAttack([0, 1]);
+    gameboard.receiveAttack([0, 2]);
+
+    gameboard.receiveAttack([4, 2]);
+    gameboard.receiveAttack([5, 2]);
+    gameboard.receiveAttack([6, 2]);
+    expect(gameboard.board).toBe([
+      ["hit", "hit", "hit", null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, "hit", null, null, null, null, null, null, null],
+      [null, null, "hit", null, null, null, null, null, null, null],
+      [null, null, "hit", null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, "miss"],
+      [null, null, null, null, null, null, null, null, null, "miss"],
+    ]);
+    expect(ship1.isSunk()).toBe(true);
+    expect(ship2.isSunk()).toBe(true);
+  });
+});
