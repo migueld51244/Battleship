@@ -391,6 +391,7 @@ describe("Ships cannot overlap", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.placeShip(ship2, [2, 3], "horizontal")).toBe(false);
   });
 
   test("Ships can't be placed exactly above another", () => {
@@ -411,6 +412,7 @@ describe("Ships cannot overlap", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.placeShip(ship2, [2, 3], "vertical")).toBe(false);
   });
 
   test("Ships can't be placed on an empty coordinate that will end up to overlap another", () => {
@@ -431,6 +433,7 @@ describe("Ships cannot overlap", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+    expect(gameboard.placeShip(ship2, [2, 0], "horizontal")).toBe(false);
   });
 });
 
