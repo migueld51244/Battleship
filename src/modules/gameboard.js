@@ -6,10 +6,10 @@ export class Gameboard {
   }
 
   placeShip(ship, start, orientation) {
-    if (typeof ship !== "object") {
+    if (!ship || typeof ship !== "object") {
       throw new Error("Invalid ship");
     }
-    if (start.length !== 2 || !Array.isArray(start)) {
+    if (!Array.isArray(start) || start.length !== 2) {
       throw new Error("Invalid start position");
     }
     if (orientation !== "vertical" && orientation !== "horizontal") {
@@ -18,16 +18,29 @@ export class Gameboard {
 
     const [x, y] = start;
 
+    // Generate and validate coordinates
     for (let i = 0; i < ship.length; i++) {
-      if (orientation === "vertical") {
-        const coordinate = this.board[x][y + i];
-        if (coordinate !== null) return false;
-        this.board[x][y + i] = ship;
-      } else {
-        const coordinate = this.board[x][y + i];
-        if (coordinate !== null) return false;
-        this.board[x + i][y] = ship;
+      const currentX = orientation === "vertical" ? x + i : x;
+      const currentY = orientation === "horizontal" ? y + i : y;
+
+      if (currentX < 0 || currentX > 9 || !Number.isInteger(currentX)) {
+        return false;
       }
+
+      if (currentY < 0 || currentY > 9 || !Number.isInteger(currentY)) {
+        return false;
+      }
+
+      if (this.board[currentX][currentY] !== null) {
+        return false;
+      }
+    }
+
+    // Place ship
+    for (let i = 0; i < ship.length; i++) {
+      const currentX = orientation === "vertical" ? x + i : x;
+      const currentY = orientation === "horizontal" ? y + i : y;
+      this.board[currentX][currentY] = ship;
     }
 
     this.ships.push(ship);
