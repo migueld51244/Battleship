@@ -565,4 +565,9 @@ describe("Gameboard reports whether or not all of their ships have been sunk", (
     gameboard.receiveAttack([1, 8]);
     expect(gameboard.areAllShipsSunk()).toBe(true);
   });
+
+  test("Empty board sunk status is defined", () => {
+    const gameboard = new Gameboard();
+    expect(gameboard.areAllShipsSunk()).toBe(true);
+  });
 });
