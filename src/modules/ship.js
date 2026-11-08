@@ -8,8 +8,7 @@ export class Ship {
   }
 
   hit() {
-    if (!this.length) return null;
-    if (this.hits === this.length) {
+    if (this.hits >= this.length) {
       return;
     }
     this.hits++;
