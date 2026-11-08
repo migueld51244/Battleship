@@ -448,6 +448,22 @@ describe("Invalid orientation is rejected", () => {
   });
 });
 
+describe("Gameboard rejects invalid coordinates", () => {
+  test("Negative coordinates are rejected", () => {
+    const ship = new Ship();
+    const gameboard = new Gameboard();
+    expect(() => gameboard.placeShip(ship, [-1, -5], "vertical")).toThrow();
+    expect(() => gameboard.receiveAttack([-2, 0])).toThrow();
+  });
+
+  test("Coordinates outside the board are rejected", () => {
+    const ship = new Ship();
+    const gameboard = new Gameboard();
+    expect(() => gameboard.placeShip(ship, [11, 10], "vertical")).toThrow();
+    expect(() => gameboard.receiveAttack([22, 80])).toThrow();
+  });
+});
+
 describe("Gameboard tracks missed attacks", () => {
   test("Board receives two missed attacks", () => {
     const ship = new Ship(3);
