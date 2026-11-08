@@ -571,7 +571,7 @@ describe("Gameboard tracks missed attacks", () => {
     expect(ship.isSunk()).toBe(false);
   });
 
-  test("Board sinks two ships and missed 3 attacks", () => {
+  test("Board sinks two ships and missed 2 attacks", () => {
     const ship1 = new Ship(3);
     const ship2 = new Ship(3);
     const gameboard = new Gameboard();
@@ -659,6 +659,15 @@ describe("Gameboard tracks missed attacks", () => {
 
 describe("Gameboard reports whether or not all of their ships have been sunk", () => {
   test("All ships haven't been sunk when they aren't hit", () => {
+    const ship1 = new Ship(2);
+    const ship2 = new Ship(2);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship1, [4, 1], "vertical");
+    gameboard.placeShip(ship2, [0, 8], "vertical");
+    expect(gameboard.areAllShipsSunk()).toBe(false);
+  });
+
+  test("All ships aren't sunk when they are only partially hit", () => {
     const ship1 = new Ship(2);
     const ship2 = new Ship(2);
     const gameboard = new Gameboard();
