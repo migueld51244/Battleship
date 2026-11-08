@@ -115,8 +115,8 @@ describe("Correctly places ships", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, ship, null, null, null, null, null, null],
-      [null, null, null, ship, null, null, null, null, null, null],
+      [null, null, null, ship, ship, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
     expect(gameboard.ships).toEqual([ship]);
