@@ -685,7 +685,7 @@ describe("Gameboard tracks missed attacks", () => {
 });
 
 describe("Gameboard reports whether or not all of their ships have been sunk", () => {
-  test("All ships haven't been sunk when they aren't hit", () => {
+  test("All ships are unsunk when none have been attacked", () => {
     const ship1 = new Ship(2);
     const ship2 = new Ship(2);
     const gameboard = new Gameboard();
