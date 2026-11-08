@@ -16,6 +16,8 @@ export class Gameboard {
       throw new Error("Invalid orientation");
     }
 
+    if (this.ships.includes(ship)) return false;
+
     const [x, y] = start;
 
     // Generate and validate coordinates
