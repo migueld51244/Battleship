@@ -390,7 +390,7 @@ describe("Ships cannot overlap", () => {
     const ship2 = new Ship(5);
     const gameboard = new Gameboard();
     gameboard.placeShip(ship1, [2, 3], "vertical");
-    gameboard.placeShip(ship2, [2, 3], "horizontal");
+    const result = gameboard.placeShip(ship2, [2, 3], "horizontal");
     expect(gameboard.board).toEqual([
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -403,7 +403,7 @@ describe("Ships cannot overlap", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
-    expect(gameboard.placeShip(ship2, [2, 3], "horizontal")).toBe(false);
+    expect(result).toBe(false);
   });
 
   test("Ships can't be placed exactly above another", () => {
@@ -411,7 +411,7 @@ describe("Ships cannot overlap", () => {
     const ship2 = new Ship(5);
     const gameboard = new Gameboard();
     gameboard.placeShip(ship1, [2, 3], "vertical");
-    gameboard.placeShip(ship2, [2, 3], "vertical");
+    const result = gameboard.placeShip(ship2, [2, 3], "vertical");
     expect(gameboard.board).toEqual([
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -424,7 +424,7 @@ describe("Ships cannot overlap", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
-    expect(gameboard.placeShip(ship2, [2, 3], "vertical")).toBe(false);
+    expect(result).toBe(false);
   });
 
   test("Ships can't be placed on an empty coordinate that will end up to overlap another", () => {
@@ -432,7 +432,7 @@ describe("Ships cannot overlap", () => {
     const ship2 = new Ship(5);
     const gameboard = new Gameboard();
     gameboard.placeShip(ship1, [2, 3], "vertical");
-    gameboard.placeShip(ship2, [2, 0], "horizontal");
+    const result = gameboard.placeShip(ship2, [2, 0], "horizontal");
     expect(gameboard.board).toEqual([
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -445,7 +445,7 @@ describe("Ships cannot overlap", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
-    expect(gameboard.placeShip(ship2, [2, 0], "horizontal")).toBe(false);
+    expect(result).toBe(false);
   });
 });
 
