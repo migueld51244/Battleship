@@ -15,5 +15,22 @@ export class Gameboard {
     if (orientation !== "vertical" && orientation !== "horizontal") {
       throw new Error("Invalid orientation");
     }
+
+    const [x, y] = start;
+
+    for (let i = 0; i < ship.length; i++) {
+      if (orientation === "vertical") {
+        const coordinate = this.board[x][y + 1];
+        if (coordinate === null) return false;
+        this.board[x][y + i] = ship;
+      } else {
+        const coordinate = this.board[x][y + 1];
+        if (coordinate === null) return false;
+        this.board[x + i][y] = ship;
+      }
+    }
+
+    this.ships.push(ship);
+    return true;
   }
 }
