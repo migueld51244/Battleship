@@ -361,6 +361,15 @@ describe("Handle attacks", () => {
     expect(ship1.isSunk()).toBe(false);
     expect(ship2.isSunk()).toBe(true);
   });
+
+  test("Repeated attacks don't register additional hits", () => {
+    const ship = new Ship(3);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship, [0, 0], "vertical");
+    gameboard.receiveAttack([0, 0]);
+    gameboard.receiveAttack([0, 0]);
+    expect(ship.hits).toBe(1);
+  });
 });
 
 describe("Gameboard tracks missed attacks", () => {
