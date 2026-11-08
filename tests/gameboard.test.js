@@ -456,12 +456,14 @@ describe("Invalid orientation is rejected", () => {
     const ship = new Ship(3);
     const gameboard = new Gameboard();
     expect(() => gameboard.placeShip(ship, [0, 0])).toThrow();
+    expect(gameboard.board).toEqual(emptyBoard);
   });
 
   test("Ship doesn't get placed with an invalid orientation", () => {
     const ship = new Ship(3);
     const gameboard = new Gameboard();
     expect(() => gameboard.placeShip(ship, [0, 0], "diagonal")).toThrow();
+    expect(gameboard.board).toEqual(emptyBoard);
   });
 });
 
