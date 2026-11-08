@@ -263,6 +263,28 @@ describe("Ships can't overflow the board", () => {
     expect(gameboard.board).toEqual(emptyBoard);
     expect(gameboard.ships).toEqual([]);
   });
+
+  test("Can't place the same ship twice", () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(2);
+    gameboard.placeShip(ship, [0, 0], "vertical");
+    const twice = gameboard.placeShip(ship, [0, 4], "vertical");
+    expect(twice).toBe(false);
+    expect(gameboard.ships).toEqual([ship]);
+    expect(gameboard.board).toEqual([
+      [ship, null, null, null, null, null, null, null, null, null],
+      [ship, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+    expect(gameboard.attacks).toEqual(emptyBoard);
+  });
 });
 
 describe("Handle attacks", () => {
