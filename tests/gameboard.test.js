@@ -324,8 +324,8 @@ describe("Handle attacks", () => {
     gameboard.receiveAttack([2, 9]);
     expect(gameboard.board).toEqual([
       ["hit", ship1, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, ship2],
-      [null, null, null, null, null, null, null, null, null, ship2],
+      [null, null, null, null, null, null, null, null, null, "hit"],
+      [null, null, null, null, null, null, null, null, null, "hit"],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -335,6 +335,7 @@ describe("Handle attacks", () => {
       [null, null, null, null, null, null, null, null, null, null],
     ]);
     expect(ship1.hits).toBe(1);
+    expect(ship2.hits).toBe(2);
     expect(ship1.isSunk()).toBe(false);
     expect(ship2.isSunk()).toBe(true);
   });
