@@ -48,4 +48,18 @@ export class Gameboard {
     this.ships.push(ship);
     return true;
   }
+
+  receiveAttack(pair) {
+    if (!Array.isArray(pair) || pair.length !== 2) {
+      throw new Error("Invalid coordinates format");
+    }
+    const [x, y] = pair;
+
+    if (x < 0 || x > 9 || !Number.isInteger(x)) {
+      throw new Error("Invalid coordinates");
+    }
+    if (y < 0 || y > 9 || !Number.isInteger(x)) {
+      throw new Error("Invalid coordinates");
+    }
+  }
 }
