@@ -81,14 +81,36 @@ describe("Correctly places ships", () => {
     const gameboard = new Gameboard();
     const ship = new Ship(4);
     gameboard.placeShip(ship, [3, 6], "vertical");
-    expect(gameboard.board).toEqual(emptyBoard);
+    expect(gameboard.board).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, ship, null, null, null],
+      [null, null, null, null, null, null, ship, null, null, null],
+      [null, null, null, null, null, null, ship, null, null, null],
+      [null, null, null, null, null, null, ship, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
   });
 
   test("Place ship horizontally starting at [7, 3], length 2", () => {
     const gameboard = new Gameboard();
     const ship = new Ship(2);
     gameboard.placeShip(ship, [7, 3], "horizontal");
-    expect(gameboard.board).toEqual(emptyBoard);
+    expect(gameboard.board).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, ship, null, null, null, null, null, null],
+      [null, null, null, ship, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
   });
 });
 
