@@ -15,9 +15,8 @@ const emptyBoard = [
 ];
 
 describe("Check empty gameboard properties", () => {
-  const gameboard = new Gameboard();
-
   test("Gameboard is empty upon creation", () => {
+    const gameboard = new Gameboard();
     expect(gameboard.board).toEqual(emptyBoard);
   });
 });
