@@ -20,12 +20,12 @@ export class Gameboard {
 
     for (let i = 0; i < ship.length; i++) {
       if (orientation === "vertical") {
-        const coordinate = this.board[x][y + 1];
-        if (coordinate === null) return false;
+        const coordinate = this.board[x][y + i];
+        if (coordinate !== null) return false;
         this.board[x][y + i] = ship;
       } else {
-        const coordinate = this.board[x][y + 1];
-        if (coordinate === null) return false;
+        const coordinate = this.board[x][y + i];
+        if (coordinate !== null) return false;
         this.board[x + i][y] = ship;
       }
     }
