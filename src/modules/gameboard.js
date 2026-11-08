@@ -6,7 +6,13 @@ export class Gameboard {
   }
 
   placeShip(ship, start, orientation) {
-    if (!ship || typeof ship !== "object") {
+    if (
+      !ship ||
+      typeof ship !== "object" ||
+      typeof ship.hit !== "function" ||
+      typeof ship.isSunk !== "function" ||
+      ship.length <= 0
+    ) {
       throw new Error("Invalid ship");
     }
     if (!Array.isArray(start) || start.length !== 2) {
@@ -66,7 +72,7 @@ export class Gameboard {
     if (x < 0 || x > 9 || !Number.isInteger(x)) {
       throw new Error("Invalid coordinates");
     }
-    if (y < 0 || y > 9 || !Number.isInteger(x)) {
+    if (y < 0 || y > 9 || !Number.isInteger(y)) {
       throw new Error("Invalid coordinates");
     }
 
