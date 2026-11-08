@@ -33,11 +33,11 @@ export class Gameboard {
       const currentX = orientation === "vertical" ? x + i : x;
       const currentY = orientation === "horizontal" ? y + i : y;
 
-      if (currentX < 0 || currentX > 9 || !Number.isInteger(currentX)) {
+      if (currentX < 0 || currentX > 9) {
         return false;
       }
 
-      if (currentY < 0 || currentY > 9 || !Number.isInteger(currentY)) {
+      if (currentY < 0 || currentY > 9) {
         return false;
       }
 
