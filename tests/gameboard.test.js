@@ -272,8 +272,8 @@ describe("Handle attacks", () => {
     const gameboard = new Gameboard();
     gameboard.placeShip(ship, [0, 0], "horizontal");
     gameboard.receiveAttack([0, 0]);
-    expect(gameboard.board).toEqual([
-      ["hit", ship, null, null, null, null, null, null, null, null],
+    expect(gameboard.attacks).toEqual([
+      ["hit", null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -293,8 +293,8 @@ describe("Handle attacks", () => {
     gameboard.placeShip(ship, [0, 0], "horizontal");
     gameboard.receiveAttack([0, 0]);
     gameboard.receiveAttack([0, 1]);
-    expect(gameboard.board).toEqual([
-      ["hit", "hit", ship, null, null, null, null, null, null, null],
+    expect(gameboard.attacks).toEqual([
+      ["hit", "hit", null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -329,7 +329,7 @@ describe("Handle attacks", () => {
     gameboard.receiveAttack([4, 0]);
     gameboard.receiveAttack([4, 1]);
 
-    expect(gameboard.board).toEqual([
+    expect(gameboard.attacks).toEqual([
       ["hit", "hit", "hit", null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       ["hit", "hit", "hit", "hit", "hit", null, null, null, null, null],
@@ -356,8 +356,8 @@ describe("Handle attacks", () => {
 
     gameboard.receiveAttack([1, 9]);
     gameboard.receiveAttack([2, 9]);
-    expect(gameboard.board).toEqual([
-      ["hit", ship1, null, null, null, null, null, null, null, null],
+    expect(gameboard.attacks).toEqual([
+      ["hit", null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, "hit"],
       [null, null, null, null, null, null, null, null, null, "hit"],
       [null, null, null, null, null, null, null, null, null, null],
@@ -477,6 +477,15 @@ describe("Gameboard rejects invalid coordinates", () => {
     expect(() => gameboard.placeShip(ship, [11, 10], "vertical")).toThrow();
     expect(() => gameboard.receiveAttack([22, 80])).toThrow();
   });
+
+  test("Non integer coordinates are rejected", () => {
+    const ship = new Ship(2);
+    const gameboard = new Gameboard();
+    expect(() =>
+      gameboard.placeShip(ship, [1, 51, 0, 10], "vertical"),
+    ).toThrow();
+    expect(() => gameboard.receiveAttack([2, 2, 80])).toThrow();
+  });
 });
 
 describe("Gameboard tracks missed attacks", () => {
@@ -486,8 +495,8 @@ describe("Gameboard tracks missed attacks", () => {
     gameboard.placeShip(ship, [0, 0], "horizontal");
     gameboard.receiveAttack([8, 9]);
     gameboard.receiveAttack([9, 9]);
-    expect(gameboard.board).toEqual([
-      [ship, ship, ship, null, null, null, null, null, null, null],
+    expect(gameboard.attacks).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -507,8 +516,8 @@ describe("Gameboard tracks missed attacks", () => {
     gameboard.receiveAttack([8, 9]);
     gameboard.receiveAttack([9, 9]);
     gameboard.receiveAttack([0, 1]);
-    expect(gameboard.board).toEqual([
-      [ship, "hit", ship, null, null, null, null, null, null, null],
+    expect(gameboard.attacks).toEqual([
+      [null, "hit", null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -539,7 +548,7 @@ describe("Gameboard tracks missed attacks", () => {
     gameboard.receiveAttack([4, 2]);
     gameboard.receiveAttack([5, 2]);
     gameboard.receiveAttack([6, 2]);
-    expect(gameboard.board).toEqual([
+    expect(gameboard.attacks).toEqual([
       ["hit", "hit", "hit", null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
