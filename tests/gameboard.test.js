@@ -497,6 +497,16 @@ describe("Gameboard rejects invalid coordinates", () => {
     expect(gameboard.attacks).toEqual(emptyBoard);
     expect(gameboard.ships).toEqual([]);
   });
+
+  test("Reject invalid coordinates structure", () => {
+    const ship = new Ship(2);
+    const gameboard = new Gameboard();
+    expect(() => gameboard.placeShip(ship, [9, 7, 1], "vertical")).toThrow();
+    expect(() => gameboard.receiveAttack([[2, 4], 80])).toThrow();
+    expect(gameboard.board).toEqual(emptyBoard);
+    expect(gameboard.attacks).toEqual(emptyBoard);
+    expect(gameboard.ships).toEqual([]);
+  });
 });
 
 describe("Gameboard tracks missed attacks", () => {
