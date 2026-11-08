@@ -372,6 +372,68 @@ describe("Handle attacks", () => {
   });
 });
 
+describe("Ships cannot overlap", () => {
+  test("Ships isn't placed if it overlaps another", () => {
+    const ship1 = new Ship(5);
+    const ship2 = new Ship(5);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship1, [2, 3], "vertical");
+    gameboard.placeShip(ship2, [2, 3], "horizontal");
+    expect(gameboard.board).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+
+  test("Ships can't be placed exactly above another", () => {
+    const ship1 = new Ship(5);
+    const ship2 = new Ship(5);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship1, [2, 3], "vertical");
+    gameboard.placeShip(ship2, [2, 3], "vertical");
+    expect(gameboard.board).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+
+  test("Ships can't be placed on an empty coordinate that will end up to overlap another", () => {
+    const ship1 = new Ship(5);
+    const ship2 = new Ship(5);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship1, [2, 3], "vertical");
+    gameboard.placeShip(ship2, [2, 0], "horizontal");
+    expect(gameboard.board).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, ship1, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+});
+
 describe("Gameboard tracks missed attacks", () => {
   test("Board receives two missed attacks", () => {
     const ship = new Ship(3);
