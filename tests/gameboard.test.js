@@ -481,10 +481,8 @@ describe("Gameboard rejects invalid coordinates", () => {
   test("Non integer coordinates are rejected", () => {
     const ship = new Ship(2);
     const gameboard = new Gameboard();
-    expect(() =>
-      gameboard.placeShip(ship, [1, 51, 0, 10], "vertical"),
-    ).toThrow();
-    expect(() => gameboard.receiveAttack([2, 2, 80])).toThrow();
+    expect(() => gameboard.placeShip(ship, [1.51, 0.1], "vertical")).toThrow();
+    expect(() => gameboard.receiveAttack([2.2, 80])).toThrow();
   });
 });
 
