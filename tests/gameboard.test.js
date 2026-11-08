@@ -348,7 +348,7 @@ describe("Gameboard tracks missed attacks", () => {
     gameboard.placeShip(ship, [0, 0], "horizontal");
     gameboard.receiveAttack([8, 9]);
     gameboard.receiveAttack([9, 9]);
-    expect(gameboard.board).toBe([
+    expect(gameboard.board).toEqual([
       [ship, ship, ship, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -369,7 +369,7 @@ describe("Gameboard tracks missed attacks", () => {
     gameboard.receiveAttack([8, 9]);
     gameboard.receiveAttack([9, 9]);
     gameboard.receiveAttack([0, 1]);
-    expect(gameboard.board).toBe([
+    expect(gameboard.board).toEqual([
       [ship, "hit", ship, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -401,7 +401,7 @@ describe("Gameboard tracks missed attacks", () => {
     gameboard.receiveAttack([4, 2]);
     gameboard.receiveAttack([5, 2]);
     gameboard.receiveAttack([6, 2]);
-    expect(gameboard.board).toBe([
+    expect(gameboard.board).toEqual([
       ["hit", "hit", "hit", null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
