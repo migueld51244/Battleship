@@ -472,6 +472,9 @@ describe("Gameboard rejects invalid coordinates", () => {
     const gameboard = new Gameboard();
     expect(() => gameboard.placeShip(ship, [-1, -5], "vertical")).toThrow();
     expect(() => gameboard.receiveAttack([-2, 0])).toThrow();
+    expect(gameboard.board).toEqual(emptyBoard);
+    expect(gameboard.attacks).toEqual(emptyBoard);
+    expect(gameboard.ships).toEqual([]);
   });
 
   test("Coordinates outside the board are rejected", () => {
@@ -479,6 +482,9 @@ describe("Gameboard rejects invalid coordinates", () => {
     const gameboard = new Gameboard();
     expect(() => gameboard.placeShip(ship, [11, 10], "vertical")).toThrow();
     expect(() => gameboard.receiveAttack([22, 80])).toThrow();
+    expect(gameboard.board).toEqual(emptyBoard);
+    expect(gameboard.attacks).toEqual(emptyBoard);
+    expect(gameboard.ships).toEqual([]);
   });
 
   test("Non integer coordinates are rejected", () => {
@@ -486,6 +492,9 @@ describe("Gameboard rejects invalid coordinates", () => {
     const gameboard = new Gameboard();
     expect(() => gameboard.placeShip(ship, [1.51, 0.1], "vertical")).toThrow();
     expect(() => gameboard.receiveAttack([2.2, 80])).toThrow();
+    expect(gameboard.board).toEqual(emptyBoard);
+    expect(gameboard.attacks).toEqual(emptyBoard);
+    expect(gameboard.ships).toEqual([]);
   });
 });
 
