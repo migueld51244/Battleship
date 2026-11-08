@@ -622,6 +622,39 @@ describe("Gameboard tracks missed attacks", () => {
       [null, null, null, null, null, null, null, null, null, null],
     ]);
   });
+
+  test("Gameboard ignores attack on already attacked coordinate", () => {
+    const ship = new Ship(3);
+    const gameboard = new Gameboard();
+    gameboard.placeShip(ship, [0, 0], "horizontal");
+    gameboard.receiveAttack([0, 0]);
+    const result = gameboard.receiveAttack([0, 0]);
+    expect(gameboard.board).toEqual([
+      [ship, ship, ship, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+    expect(result).toBe(false);
+    expect(gameboard.attacks).toEqual([
+      ["hit", null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
 });
 
 describe("Gameboard reports whether or not all of their ships have been sunk", () => {
