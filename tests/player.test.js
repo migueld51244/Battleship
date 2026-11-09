@@ -97,4 +97,13 @@ describe("Player can attack", () => {
     expect(player1.gameboard.ships[0].hits).toBe(1);
     expect(player2.gameboard.ships[0].hits).toBe(1);
   });
+
+  test("Rejects invalid attack target", () => {
+    const player1 = new Player("Sally");
+    const player2 = new Player("Joey");
+    player1.gameboard.placeShip(new Ship(3), [4, 2], "horizontal");
+    player2.gameboard.placeShip(new Ship(3), [1, 6], "vertical");
+
+    expect(() => player1.attack(null, [4, 3])).toThrow();
+  });
 });
