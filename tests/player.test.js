@@ -17,6 +17,15 @@ describe("Player has a board", () => {
     const empty = Array.from({ length: 10 }, () => new Array(10).fill(null));
     expect(player.gameboard.board).toEqual(empty);
   });
+  test("Reject empty string as name", () => {
+    expect(() => new Player("")).toThrow();
+  });
+
+  test("Reject invalid name types", () => {
+    expect(() => new Player(11)).toThrow();
+    expect(() => new Player(["Mike"])).toThrow();
+    expect(() => new Player({ name: "Paul" })).toThrow();
+  });
 });
 
 describe("Player can attack", () => {
@@ -26,7 +35,7 @@ describe("Player can attack", () => {
 
     player1.attack(player2.gameboard, [0, 0]);
     expect(player2.gameboard.attacks).toEqual([
-      ["hit", null, null, null, null, null, null, null, null, null],
+      ["miss", null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
@@ -37,5 +46,13 @@ describe("Player can attack", () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ]);
+  });
+
+  test("Attack doesn't modify the player's own board", () => {
+    const player1 = new Player("Lucy");
+    const player2 = new Player("Lewis");
+    const empty = Array.from({ length: 10 }, () => new Array(10).fill(null));
+    player1.attack(player2.gameboard, [4, 2]);
+    expect(player1.gameboard.board).toEqual(empty);
   });
 });
