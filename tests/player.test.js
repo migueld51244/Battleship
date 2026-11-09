@@ -9,7 +9,7 @@ describe("Player has a name", () => {
   test("Can't create player without a name", () => {
     expect(() => new Player()).toThrow();
   });
-  
+
   test("Reject empty string as name", () => {
     expect(() => new Player("")).toThrow();
   });
@@ -55,5 +55,26 @@ describe("Player can attack", () => {
     const empty = Array.from({ length: 10 }, () => new Array(10).fill(null));
     player1.attack(player2.gameboard, [4, 2]);
     expect(player1.gameboard.board).toEqual(empty);
+  });
+
+  test("Attack returns true for a successful attack", () => {
+    const player1 = new Player("Sally");
+    const player2 = new Player("Joey");
+    player1.gameboard.placeShip(new Ship(3), [4, 2], "horizontal");
+    player2.gameboard.placeShip(new Ship(3), [1, 6], "vertical");
+
+    expect(() => player1.attack(player2.gameboard, [4, 3])).toBe(true);
+    expect(() => player2.attack(player1.gameboard, [2, 6])).toBe(true);
+  });
+
+  test("Attack returns false for a repeated attack", () => {
+    const player1 = new Player("Sally");
+    const player2 = new Player("Joey");
+    player1.gameboard.placeShip(new Ship(3), [4, 2], "horizontal");
+    player2.gameboard.placeShip(new Ship(3), [1, 6], "vertical");
+
+    expect(() => player1.attack(player2.gameboard, [4, 3])).toBe(true);
+    expect(() => player2.attack(player1.gameboard, [2, 6])).toBe(true);
+    expect(() => player1.attack(player2.gameboard, [4, 3])).toBe(false);
   });
 });
