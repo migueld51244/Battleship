@@ -9,14 +9,7 @@ describe("Player has a name", () => {
   test("Can't create player without a name", () => {
     expect(() => new Player()).toThrow();
   });
-});
-
-describe("Player has a board", () => {
-  test("Player starts with an empty gameboard", () => {
-    const player = new Player("Smith");
-    const empty = Array.from({ length: 10 }, () => new Array(10).fill(null));
-    expect(player.gameboard.board).toEqual(empty);
-  });
+  
   test("Reject empty string as name", () => {
     expect(() => new Player("")).toThrow();
   });
@@ -25,6 +18,14 @@ describe("Player has a board", () => {
     expect(() => new Player(11)).toThrow();
     expect(() => new Player(["Mike"])).toThrow();
     expect(() => new Player({ name: "Paul" })).toThrow();
+  });
+});
+
+describe("Player has a board", () => {
+  test("Player starts with an empty gameboard", () => {
+    const player = new Player("Smith");
+    const empty = Array.from({ length: 10 }, () => new Array(10).fill(null));
+    expect(player.gameboard.board).toEqual(empty);
   });
 });
 
