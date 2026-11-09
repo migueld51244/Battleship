@@ -15,7 +15,7 @@ describe("Player has a board", () => {
   test("Player starts with an empty gameboard", () => {
     const player = new Player("Smith");
     const empty = Array.from({ length: 10 }, () => new Array(10).fill(null));
-    expect(player.gameboard).toEqual(empty);
+    expect(player.gameboard.board).toEqual(empty);
   });
 });
 
@@ -25,7 +25,7 @@ describe("Player can attack", () => {
     const player2 = new Player("Harry");
 
     player1.attack(player2.gameboard, [0, 0]);
-    expect(player1.gameboard.attacks).toEqual([
+    expect(player2.gameboard.attacks).toEqual([
       ["hit", null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
