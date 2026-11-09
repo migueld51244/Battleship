@@ -69,8 +69,8 @@ describe("Player can attack", () => {
     player1.gameboard.placeShip(new Ship(3), [4, 2], "horizontal");
     player2.gameboard.placeShip(new Ship(3), [1, 6], "vertical");
 
-    expect(() => player1.attack(player2.gameboard, [4, 3])).toBe(true);
-    expect(() => player2.attack(player1.gameboard, [2, 6])).toBe(true);
+    expect(player1.attack(player2.gameboard, [4, 3])).toBe(true);
+    expect(player2.attack(player1.gameboard, [2, 6])).toBe(true);
   });
 
   test("Attack returns false for a repeated attack", () => {
@@ -79,9 +79,9 @@ describe("Player can attack", () => {
     player1.gameboard.placeShip(new Ship(3), [4, 2], "horizontal");
     player2.gameboard.placeShip(new Ship(3), [1, 6], "vertical");
 
-    expect(() => player1.attack(player2.gameboard, [4, 3])).toBe(true);
-    expect(() => player2.attack(player1.gameboard, [2, 6])).toBe(true);
-    expect(() => player1.attack(player2.gameboard, [4, 3])).toBe(false);
+    expect(player1.attack(player2.gameboard, [4, 3])).toBe(true);
+    expect(player2.attack(player1.gameboard, [2, 6])).toBe(true);
+    expect(player1.attack(player2.gameboard, [4, 3])).toBe(false);
   });
 
   test("Attack actually damages an opponent's ship", () => {
