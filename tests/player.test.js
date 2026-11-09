@@ -32,7 +32,7 @@ describe("Player has a board", () => {
   test("Player receives a distinct Gameboard instance", () => {
     const player1 = new Player("James");
     const player2 = new Player("Roman");
-    expect(player1.gameboard.board).not.toBe(player2.gameboard.board);
+    expect(player1.gameboard).not.toBe(player2.gameboard);
   });
 });
 
