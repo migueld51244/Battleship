@@ -77,4 +77,43 @@ describe("Player can attack", () => {
     expect(() => player2.attack(player1.gameboard, [2, 6])).toBe(true);
     expect(() => player1.attack(player2.gameboard, [4, 3])).toBe(false);
   });
+
+  test("Attack actually damages an opponent's ship", () => {
+    const player1 = new Player("Sally");
+    const player2 = new Player("Joey");
+    player1.gameboard.placeShip(new Ship(3), [4, 2], "horizontal");
+    player2.gameboard.placeShip(new Ship(3), [1, 6], "vertical");
+
+    player1.attack(player2.gameboard, [4, 3]);
+    player2.attack(player1.gameboard, [2, 6]);
+
+    expect(player1.gameboard.attacks).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, "hit", null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+
+    expect(player2.gameboard.attacks).toEqual([
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, "hit", null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+
+    expect(player1.gameboard.ships[0].hits).toBe(1);
+    expect(player2.gameboard.ships[0].hits).toBe(1);
+  });
 });
