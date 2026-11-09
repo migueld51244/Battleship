@@ -27,6 +27,12 @@ describe("Player has a board", () => {
     const empty = Array.from({ length: 10 }, () => new Array(10).fill(null));
     expect(player.gameboard.board).toEqual(empty);
   });
+
+  test("Player receives a distinct Gameboard instance", () => {
+    const player1 = new Player("James");
+    const player2 = new Player("Roman");
+    expect(player1.gameboard.board).not.toBe(player2.gameboard.board);
+  });
 });
 
 describe("Player can attack", () => {
