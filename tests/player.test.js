@@ -1,4 +1,5 @@
 import { Player } from "../src/modules/player.js";
+import { Ship } from "../src/modules/ship.js";
 
 describe("Player has a name", () => {
   test("Player name matches the provided one", () => {
