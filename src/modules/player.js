@@ -6,6 +6,6 @@ export class Player {
       throw new Error("Invalid name");
     }
     this.name = name;
-    this.board = new Gameboard();
+    this.gameboard = new Gameboard();
   }
 }
