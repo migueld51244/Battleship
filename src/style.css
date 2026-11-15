@@ -6,4 +6,25 @@
 
 body {
   font-family: "JetBrains Mono", sans-serif;
+  background: url("./assets/images/game-wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background-color: rgba(22, 55, 11, 0.6);
+  border-radius: 20px;
+  padding: 0.6rem;
+  width: 30%;
+  margin: 1rem auto 0;
+  text-align: center;
+}
+
+.control-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
