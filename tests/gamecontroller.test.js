@@ -46,9 +46,22 @@ describe("Win detection", () => {
     const p2 = new Player("Paul");
     const ship = new Ship(1);
     const controller = new GameController(p1, p2);
-    controller.insertShip(p1, ship);
+    controller.insertShip(p1, ship, [2, 3]);
     controller.playTurn([2, 3]);
     controller.playTurn([2, 3]);
+    expect(controller.winner).toEqual(controller.currentPlayer);
+    expect(controller.gameOver).toBe(true);
+  });
+
+  test("Rejects turns after game ends", () => {
+    const p1 = new Player("Jonas");
+    const p2 = new Player("Paul");
+    const ship = new Ship(1);
+    const controller = new GameController(p1, p2);
+    controller.insertShip(p1, ship, [2, 3]);
+    controller.playTurn([2, 3]);
+    controller.playTurn([2, 3]);
+    expect(controller.playTurn([3, 1])).toBe(false);
     expect(controller.winner).toEqual(controller.currentPlayer);
     expect(controller.gameOver).toBe(true);
   });
