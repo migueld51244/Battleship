@@ -68,10 +68,10 @@ describe("Win detection", () => {
     const p2 = new Player("Paul");
     const ship = new Ship(1);
     const controller = new GameController(p1, p2);
+    controller.currentPlayer.gameboard.placeShip(ship, [0, 0], "horizontal");
     const currPlayer = controller.currentPlayer;
-    controller.insertShip(currPlayer, ship, [2, 3]);
     controller.playTurn([6, 3]);
-    controller.playTurn([2, 3]);
+    controller.playTurn([0, 0]);
     expect(controller.winner).toEqual(currPlayer);
     expect(controller.gameOver).toBe(true);
   });
