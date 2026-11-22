@@ -7,7 +7,7 @@ describe("Stores players", () => {
     const p1 = new Player("Ryan");
     const p2 = new Player("Tim");
     const controller = new GameController(p1, p2);
-    expect(controller.players).toEqual([p1, p1]);
+    expect(controller.players).toEqual([p1, p2]);
   });
 });
 
@@ -16,7 +16,7 @@ describe("Selects the starting player", () => {
     const p1 = new Player("Ryan");
     const p2 = new Player("Tim");
     const controller = new GameController(p1, p2);
-    expect(controller.players).toContainEqual(controller.startingPlayer);
+    expect(controller.players).toContainEqual(controller.currentPlayer);
   });
 });
 
