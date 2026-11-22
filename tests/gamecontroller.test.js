@@ -20,6 +20,28 @@ describe("Selects the starting player", () => {
   });
 });
 
+describe("Attacks", () => {
+  test("Opponent board gets attacked", () => {
+    const p1 = new Player("Jonas");
+    const p2 = new Player("Paul");
+    const controller = new GameController(p1, p2);
+    controller.playTurn([5, 3]);
+    controller.playTurn([0, 0]);
+    expect(controller.currentPlayer.gameboard.board).toEqual([
+      ["miss", null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ]);
+  });
+});
+
 describe("Turn execution", () => {
   test("Starting player is replaced after valid move", () => {
     const p1 = new Player("Jonas");
