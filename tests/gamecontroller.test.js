@@ -25,13 +25,19 @@ describe("Attacks", () => {
     const p1 = new Player("Jonas");
     const p2 = new Player("Paul");
     const controller = new GameController(p1, p2);
+    const opponent = controller.players.find(
+      (player) => player !== controller.currentPlayer,
+    );
     controller.playTurn([5, 3]);
     controller.playTurn([0, 0]);
-    expect(controller.currentPlayer.gameboard.attacks[0][0]).toBe("miss");
+    expect(controller.opponent.gameboard.attacks[0][0]).toBe("miss");
   });
 });
 
 describe("Turn execution", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   test("Starting player is replaced after valid move", () => {
     const p1 = new Player("Jonas");
     const p2 = new Player("Paul");
@@ -59,6 +65,7 @@ describe("Turn execution", () => {
     controller.players[1].gameboard.placeShip(ship, [1, 1], "vertical");
     controller.playTurn([1, 1]);
     expect(controller.currentPlayer).toEqual(p2);
+    expect(controller.players[0].gameboard.board[1][1].toBe("hit"));
   });
 
   test("Missed attack counts as valid and changes current player", () => {
