@@ -3,6 +3,9 @@ import { Ship } from "../src/modules/ship.js";
 import { GameController } from "../src/modules/gamecontroller.js";
 
 describe("Stores players", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   test("Stores 2 players", () => {
     const p1 = new Player("Ryan");
     const p2 = new Player("Tim");
@@ -12,6 +15,9 @@ describe("Stores players", () => {
 });
 
 describe("Selects the starting player", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   test("Selects the starting player randomly", () => {
     const p1 = new Player("Ryan");
     const p2 = new Player("Tim");
@@ -21,6 +27,9 @@ describe("Selects the starting player", () => {
 });
 
 describe("Attacks", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   test("Opponent board gets attacked", () => {
     const p1 = new Player("Jonas");
     const p2 = new Player("Paul");
@@ -28,9 +37,9 @@ describe("Attacks", () => {
     const opponent = controller.players.find(
       (player) => player !== controller.currentPlayer,
     );
-    controller.playTurn([5, 3]);
-    controller.playTurn([0, 0]);
-    expect(controller.opponent.gameboard.attacks[0][0]).toBe("miss");
+    expect(controller.playTurn([5, 3])).toBe(true);
+    expect(controller.playTurn([0, 0])).toBe(true);
+    expect(opponent.gameboard.attacks[0][0]).toBe("miss");
   });
 });
 
@@ -43,7 +52,7 @@ describe("Turn execution", () => {
     const p2 = new Player("Paul");
     const controller = new GameController(p1, p2);
     const firstPlayer = controller.currentPlayer;
-    controller.playTurn([5, 3]);
+    expect(controller.playTurn([5, 3])).toBe(true);
     expect(controller.currentPlayer).not.toEqual(firstPlayer);
   });
 
@@ -52,7 +61,7 @@ describe("Turn execution", () => {
     const p2 = new Player("Paul");
     const controller = new GameController(p1, p2);
     const firstPlayer = controller.currentPlayer;
-    controller.playTurn([5, -3]);
+    expect(controller.playTurn([5, -3])).toBe(false);
     expect(controller.currentPlayer).toEqual(firstPlayer);
   });
 
@@ -63,9 +72,9 @@ describe("Turn execution", () => {
     const ship = new Ship(2);
     const controller = new GameController(p1, p2);
     controller.players[1].gameboard.placeShip(ship, [1, 1], "vertical");
-    controller.playTurn([1, 1]);
+    expect(controller.playTurn([1, 1])).toBe(true);
     expect(controller.currentPlayer).toEqual(p2);
-    expect(controller.players[0].gameboard.board[1][1].toBe("hit"));
+    expect(controller.players[0].gameboard.attacks[1][1]).toBe("hit");
   });
 
   test("Missed attack counts as valid and changes current player", () => {
@@ -74,7 +83,7 @@ describe("Turn execution", () => {
     jest.spyOn(Math, "random").mockReturnValue(0);
 
     const controller = new GameController(p1, p2);
-    controller.playTurn([1, 1]);
+    expect(controller.playTurn([1, 1])).toBe(true);
     expect(controller.currentPlayer).toEqual(p2);
   });
 });
@@ -93,7 +102,7 @@ describe("Win detection", () => {
     const controller = new GameController(p1, p2);
 
     controller.players[1].gameboard.placeShip(ship, [0, 0], "horizontal");
-    controller.playTurn([0, 0]);
+    expect(controller.playTurn([0, 0])).toBe(true);
     expect(controller.winner).toEqual(p1);
     expect(controller.currentPlayer).toEqual(p1);
     expect(controller.gameOver).toBe(true);
@@ -108,7 +117,7 @@ describe("Win detection", () => {
     const controller = new GameController(p1, p2);
 
     controller.players[1].gameboard.placeShip(ship, [0, 0], "horizontal");
-    controller.playTurn([0, 0]);
+    expect(controller.playTurn([0, 0])).toBe(true);
     expect(controller.winner).toEqual(p1);
     expect(controller.gameOver).toBe(true);
     expect(controller.playTurn([3, 1])).toBe(false);
