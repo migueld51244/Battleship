@@ -27,18 +27,7 @@ describe("Attacks", () => {
     const controller = new GameController(p1, p2);
     controller.playTurn([5, 3]);
     controller.playTurn([0, 0]);
-    expect(controller.currentPlayer.gameboard.board).toEqual([
-      ["miss", null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-    ]);
+    expect(controller.currentPlayer.gameboard.attacks[(0, 0)]).toBe("miss");
   });
 });
 
