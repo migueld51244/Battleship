@@ -20,6 +20,7 @@
   "homepage": "https://github.com/migueld51244/Battleship#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.29.7",
+    "@types/jest": "^30.0.0",
     "css-loader": "^7.1.5",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.8",
