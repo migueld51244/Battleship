@@ -57,12 +57,16 @@ describe("Win detection", () => {
     const p2 = new Player("Paul");
     const ship = new Ship(1);
     const controller = new GameController(p1, p2);
-    controller.currentPlayer.gameboard.placeShip(ship, [0, 0], "horizontal");
-    const currPlayer = controller.currentPlayer;
-    controller.playTurn([6, 3]);
+
+    jest.spyOn(Math, "random").mockReturnValue(0);
+
+    controller.players[1].gameboard.placeShip(ship, [0, 0], "horizontal");
     controller.playTurn([0, 0]);
-    expect(controller.winner).toEqual(currPlayer);
+    expect(controller.winner).toEqual(p1);
     expect(controller.gameOver).toBe(true);
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
   });
 
   test("Rejects turns after game ends", () => {
@@ -70,11 +74,16 @@ describe("Win detection", () => {
     const p2 = new Player("Paul");
     const ship = new Ship(1);
     const controller = new GameController(p1, p2);
-    controller.insertShip(p1, ship, [2, 3]);
-    controller.playTurn([2, 3]);
-    controller.playTurn([2, 3]);
-    expect(controller.playTurn([3, 1])).toBe(false);
-    expect(controller.winner).toEqual(controller.currentPlayer);
+
+    jest.spyOn(Math, "random").mockReturnValue(0);
+
+    controller.players[1].gameboard.placeShip(ship, [0, 0], "horizontal");
+    controller.playTurn([0, 0]);
+    expect(controller.winner).toEqual(p1);
     expect(controller.gameOver).toBe(true);
+    expect(controller.playTurn([3, 1])).toBe(false);
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
   });
 });
