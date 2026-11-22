@@ -26,7 +26,7 @@ describe("Turn execution", () => {
     const p2 = new Player("Paul");
     const controller = new GameController(p1, p2);
     const firstPlayer = controller.currentPlayer;
-    controller.currentPlayer.attack([5, 3]);
+    controller.playTurn([5, 3]);
     expect(controller.currentPlayer).not.toEqual(firstPlayer);
   });
 
@@ -35,7 +35,7 @@ describe("Turn execution", () => {
     const p2 = new Player("Paul");
     const controller = new GameController(p1, p2);
     const firstPlayer = controller.currentPlayer;
-    controller.currentPlayer.attack([5, -3]);
+    controller.playTurn([5, -3]);
     expect(controller.currentPlayer).toEqual(firstPlayer);
   });
 });
@@ -47,8 +47,8 @@ describe("Win detection", () => {
     const ship = new Ship(1);
     const controller = new GameController(p1, p2);
     controller.currentPlayer.gameboard.placeShip(ship, [2, 3]);
-    controller.currentPlayer.attack([0, 0]);
-    controller.currentPlayer.attack([2, 3]);
+    controller.playTurn([0, 0]);
+    controller.playTurn([2, 3]);
     expect(controller.winner).toEqual(currentPlayer);
     expect(controller.gameOver).toBe(true);
   });
