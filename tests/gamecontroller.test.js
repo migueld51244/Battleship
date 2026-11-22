@@ -49,6 +49,27 @@ describe("Turn execution", () => {
     controller.playTurn([5, -3]);
     expect(controller.currentPlayer).toEqual(firstPlayer);
   });
+
+  test("A valid hit switches turns", () => {
+    const p1 = new Player("Jonas");
+    const p2 = new Player("Paul");
+    jest.spyOn(Math, "random").mockReturnValue(0);
+    const ship = new Ship(2);
+    const controller = new GameController(p1, p2);
+    controller.players[1].gameboard.placeShip(ship, [1, 1], "vertical");
+    controller.playTurn([1, 1]);
+    expect(controller.currentPlayer).toEqual(p2);
+  });
+
+  test("Missed attack counts as valid and changes current player", () => {
+    const p1 = new Player("Jonas");
+    const p2 = new Player("Paul");
+    jest.spyOn(Math, "random").mockReturnValue(0);
+
+    const controller = new GameController(p1, p2);
+    controller.playTurn([1, 1]);
+    expect(controller.currentPlayer).toEqual(p2);
+  });
 });
 
 describe("Win detection", () => {
